@@ -13,8 +13,7 @@ export default class Photo extends Component {
       <div className="photo">
         <Card className="photo__card">
           <CardContent className="photo__content">
-            <img src="https://fakeimg.pl/200/" />
-            {/*<Icon style={{opacity: 0.5}}>photo</Icon>*/}
+            <img className="photo__img" src={this.props.src} />
           </CardContent>
           <CardActions className="photo__actions">
             <Icon>place</Icon>

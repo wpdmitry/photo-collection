@@ -4,10 +4,20 @@ import Photo from '../Photo/Photo';
 import './Photos.scss';
 
 export default class Photos extends Component {
+  state = {
+    photos: [],
+  };
+
+  componentDidMount() {
+    fetch('http://localhost:3000/api/photos')
+      .then(res => res.json())
+      .then(photos => this.setState({photos}));
+}
+
   render() {
     return (
       <div className="photos">
-        {[0, 1, 2, 3, 4, 5].map((_, index) => <div key={index} className="photos__photo"><Photo /></div>)}
+        {this.state.photos.map(({id, src}) => <div key={id} className="photos__photo"><Photo src={src}/></div>)}
       </div>
     )
   }

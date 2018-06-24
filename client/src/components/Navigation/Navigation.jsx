@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default () => (
   <nav>
-    <Link to="/">Home</Link>
-    <Link to="/about">About</Link>
-    <Link to="/map">Map</Link>
+    <Link to="/">Главная</Link>
+    <Link to="/download-photos">Загрузить фотографии</Link>
+    {/*<Link to="/map">Map</Link>*/}
   </nav>
 )
