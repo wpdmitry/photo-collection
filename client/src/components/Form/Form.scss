@@ -1,0 +1,31 @@
+.load-photos-form {
+    width: 400px;
+    margin: 0 auto;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input {
+        margin-bottom: 15px !important;
+    }
+
+    &__button {
+        align-self: center;
+        width: 50%;
+    }
+}
+
+.input-upload, .input-place {
+    align-self: center;
+
+    &__label {
+        display: flex;
+        align-items: flex-end;
+
+        > span {
+            padding-left: 12px;
+        }
+    }
+}

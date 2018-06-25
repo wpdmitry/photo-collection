@@ -8,6 +8,7 @@ export default class Ymaps extends Component {
 
     this.state = {
       YMap: null,
+      size: null,
       mount: false,
     };
 
@@ -38,6 +39,7 @@ export default class Ymaps extends Component {
 
       this.setState({
         YMap,
+        size: map.getBoundingClientRect(),
         mount: true,
       })
     });
@@ -54,7 +56,7 @@ export default class Ymaps extends Component {
     const {children, preloader} = this.props;
 
     return (
-      <YMapsContext.Provider value={this.state.YMap}>
+      <YMapsContext.Provider value={this.state}>
         <div ref={this.map} style={{width: '100%', height: '100%'}}>
           {preloader ? preloader() : 'Загрузка карты...'}
         </div>

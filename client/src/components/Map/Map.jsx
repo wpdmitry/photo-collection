@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import {YMaps, Placemark, Route as YRoute} from '../YMaps';
+import {YMaps, Event, CenterLabelOfMap} from '../YMaps';
 
-export default () => (
-  <div style={{width: 600, height: 600}}>
-    <YMaps center={[55.76, 37.64]} zoom={7}>
-      <Placemark coords={[55.76, 37.64]} hintContent="Москва!" balloonContent="Столица России"/>
-      <Placemark coords={[56.76, 37.64]}/>
-      <Placemark coords={[56.76, 36.64]}/>
-      <YRoute path={[[54.76, 37.64], [56.76, 37.64]]}/>
-    </YMaps>
-  </div>
-)
+export default class Map extends Component {
+  getCenter = (event) => {
+    console.log('props', this.props);
+    const {onSelectPlace} = this.props;
+    const coords = event.get('newCenter');
+
+    ymaps.geocode(coords)
+      .then(result => {
+        const geoObject = result.geoObjects.get(0);
+        const addressName = geoObject.getAddressLine();
+
+        console.log('полный адрес', addressName);
+        onSelectPlace({coords, addressName});
+      })
+      .catch(console.log);
+  }
+
+  render() {
+    const {height, width} = this.props;
+
+    return (
+      <div style={{height, width}}>
+        <YMaps>
+          <Event type="boundschange" handler={this.getCenter}/>
+          <CenterLabelOfMap />
+        </YMaps>
+      </div>
+    );
+  }
+}
