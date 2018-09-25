@@ -5,6 +5,7 @@ import './App.scss';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import LoadPhotos from './components/LoadPhotos/LoadPhotos';
+import PhotosOnMap from './components/PhotosOnMap/PhotosOnMap';
 
 export default class App extends Component {
 
@@ -15,8 +16,9 @@ export default class App extends Component {
           <Fragment>
             <Header />
             <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route path="/download-photos" component={LoadPhotos}/>
+              <Route exact path="/" component={Home} />
+              <Route path="/photos-on-map" component={PhotosOnMap} />
+              <Route path="/download-photos" component={LoadPhotos} />
             </Switch>
           </Fragment>
         </Router>

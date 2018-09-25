@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
+import {sendPhotos} from '../../actions';
 
 import './Form.scss';
 
-export default class LoadPhotosFrom extends Component {
+class Form extends Component {
   stateForm = {};
   
   checkTypes = (file) => {
@@ -47,18 +48,7 @@ export default class LoadPhotosFrom extends Component {
     formData.append('place', this.props.place.coords[0]);
     formData.append('place', this.props.place.coords[1]);
 
-    // console.log(formData.getAll('photo'));
-    // console.log(formData.getAll('title'));
-
-    fetch('http://localhost:3000/api/photos', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(res => res.json())
-      .then(console.log, console.log);
-
-    // console.log(formData.get('photos'));
-    // console.log(formData.getAll('photos'));
+    this.props.sendPhotos(formData);
   };
 
   render() {
@@ -116,3 +106,10 @@ export default class LoadPhotosFrom extends Component {
     )
   }
 }
+
+export default connect(
+  null,
+  dispatch => ({
+    sendPhotos: (collection) => dispatch(sendPhotos(collection)),
+  })
+)(Form);

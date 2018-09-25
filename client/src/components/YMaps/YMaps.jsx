@@ -21,7 +21,6 @@ export default class Ymaps extends Component {
   };
 
   componentDidMount() {
-    console.log('mount');
     const script = document.createElement('script');
     script.onload = () => this.handleOnloadMap();
     script.src = 'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
@@ -46,9 +45,6 @@ export default class Ymaps extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('should?');
-    console.log(this.props, this.state);
-    console.log(nextProps, nextState);
     return !this.state.mount;
   }
 

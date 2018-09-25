@@ -1,11 +1,12 @@
 .photos {
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
+  grid-auto-flow: row;
 
   &__photo {
-    width: 100%;
+    // width: 100%;
     height: 200px;
   }
 }

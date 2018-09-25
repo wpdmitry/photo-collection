@@ -1,22 +1,19 @@
 const photosRouter = require('express').Router();
 const {model: Photo} = require('../../models/Photo');
 const {model: PhotoCollection} = require('../../models/PhotoCollection');
-const {host, port} = require('../../config');
+const {app} = require('../../config');
 
 photosRouter.route('/')
   .get(async(req, res) => {
     try {
-      const сollections = await PhotoCollection.getCollections();
-      console.log(сollections[0]);
-      const data = сollections.map(({photos, ...rest}, index) => ({
+      const collections = await PhotoCollection.getCollections();
+      const data = collections.map(({photos, ...rest}, index) => ({
         ...rest,
         photos: photos.map(photo => ({
           id: photo._id,
-          src: `${host}:${port}/api/attachments/photos/${photo.path}`,
+          src: `${app.host}:${app.port}/api/attachments/photos/${photo.path}`,
         })),
       }));
-
-      console.log(data[0]);
 
       res.send({
         error: null,
@@ -28,7 +25,7 @@ photosRouter.route('/')
         error: 'Ошибка при получении файлов',
         data: error,
       })
-    };
+    }
   })
   .post(async(req, res) => {
     const {files, body: {title, place}} = req;

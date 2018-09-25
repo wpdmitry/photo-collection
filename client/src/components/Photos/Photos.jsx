@@ -1,34 +1,35 @@
 import React, { Component, Fragment } from 'react';
+import {connect} from 'react-redux';
 import Photo from '../Photo/Photo';
+import {addCollection, getPhotos} from '../../actions';
+import {photosSelector} from '../../selectors';
 
 import './Photos.scss';
 
-export default class Photos extends Component {
-  state = {
-    collections: [],
-  };
-
+class Photos extends Component {
   componentDidMount() {
-    fetch('http://localhost:3000/api/photos')
-      .then(res => res.json())
-      .then(result => this.setState({collections: result.data}));
+    if (this.props.photos.length === 0) {
+      this.props.getPhotos();
+    }
   }
 
   render() {
-    const {collections} = this.state;
-    let photos = [];
-    collections.forEach((c) => {
-      photos = photos.concat(c.photos.map((photo) => ({
-        place: c.place,
-        title: c.title,
-        ...photo,
-      })));
-    });
-    console.log(photos);
+    const {photos} = this.props;
+
     return (
       <div className="photos">
+        {photos.length === 0 && <h4>Загрузка...</h4>}
         {photos.map(({id, src}) => <div key={id} className="photos__photo"><Photo src={src}/></div>)}
       </div>
     )
   }
 }
+
+export default connect(
+  state => ({
+    photos: photosSelector(state),
+  }),
+  dispatch => ({
+    getPhotos: () => dispatch(getPhotos()),
+  })
+)(Photos);

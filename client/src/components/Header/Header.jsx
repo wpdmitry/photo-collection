@@ -15,8 +15,11 @@ export default () => (
         <Link to="/" style={{textDecoration: 'none'}}>
           <Button>
             <Icon style={{marginRight: 5}}>photo_camera</Icon>
-            Photographer.inessa
+            P.i.
           </Button>
+        </Link>
+        <Link to="/photos-on-map" style={{textDecoration: 'none'}}>
+          <Button>На карте</Button>
         </Link>
         <Link to="/download-photos" style={{textDecoration: 'none'}}>
           <Button>Загрузить фото</Button>

@@ -4,7 +4,6 @@ import {YMaps, Event, CenterLabelOfMap} from '../YMaps';
 
 export default class Map extends Component {
   getCenter = (event) => {
-    console.log('props', this.props);
     const {onSelectPlace} = this.props;
     const coords = event.get('newCenter');
 
@@ -13,7 +12,6 @@ export default class Map extends Component {
         const geoObject = result.geoObjects.get(0);
         const addressName = geoObject.getAddressLine();
 
-        console.log('полный адрес', addressName);
         onSelectPlace({coords, addressName});
       })
       .catch(console.log);

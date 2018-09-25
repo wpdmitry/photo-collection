@@ -1,7 +1,7 @@
 const config = require('./config');
-const app = require('./middleware')(config.photosPath);
+const app = require('./middleware')(config.app);
 const db = require('./models')(config.db);
 
 db.connect(() => {
-  app.listen(config.port, () => console.log(`Сервер запущен на порту ${config.port}`));
+  app.listen(config.app.port, () => console.log(`Сервер запущен на порту ${config.app.port}`));
 });
